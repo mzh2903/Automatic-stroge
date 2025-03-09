@@ -1,7 +1,6 @@
-/* Reset dasar */
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f4f7fc;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -9,12 +8,12 @@ body {
 
 .container {
   max-width: 400px;
-  margin: 60px auto;
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  display: none; /* Tersembunyi saat loading */
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none; /* Awalnya disembunyikan saat loading */
 }
 
 h1 {
@@ -29,7 +28,7 @@ h1 {
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
 }
 
@@ -40,28 +39,20 @@ h1 {
 }
 
 .indicator {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background-color: gray;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.indicator.glow {
-  box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+  margin-bottom: 5px;
 }
 
 button {
-  padding: 12px 25px;
+  padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  width: 180px;
+  width: 150px;
 }
 
 #autoButton {
@@ -83,39 +74,23 @@ button {
   color: white;
 }
 
-/* Hover efek */
-button:hover {
-  opacity: 0.8;
-}
-
 /* Animasi Loading */
 #loadingScreen {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: white;
+  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 20px;
+  text-align: center;
   color: #333;
+  font-size: 20px;
 }
 
-.loading-image {
-  width: 120px;
-  height: 120px;
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Emergency Flash */
-@keyframes emergencyBlink {
-  0% { background-color: red; }
-  50% { background-color: gray; }
-  100% { background-color: red; }
+/* Gambar Loading Kartun */
+#loadingImage {
+  width: 150px; /* Sesuaikan ukuran */
+  height: auto;
 }
