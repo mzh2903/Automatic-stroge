@@ -1,131 +1,121 @@
-/* ======== GLOBAL STYLE ======== */
+/* Reset dasar */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f7fc;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: none; /* Tersembunyi saat loading */
 }
 
 h1 {
-    margin-bottom: 10px;
+  color: #333;
 }
 
 .status {
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
-/* ======== CONTAINER ======== */
-.container {
-    max-width: 450px;
-    margin: 50px auto;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-/* ======== BUTTON GRID ======== */
-.button-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ======== BUTTON STYLE ======== */
 .button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.indicator {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: gray;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.indicator.glow {
+  box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
 }
 
 button {
-    width: 150px;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 180px;
 }
 
-/* Efek Hover */
-button:hover {
-    transform: scale(1.05);
-}
-
-/* Warna tombol */
 #autoButton {
-    background-color: #28a745;
-    color: white;
+  background-color: green;
+  color: white;
 }
 
 #manualButton {
-    background-color: #ffc107;
-    color: black;
+  background-color: yellow;
 }
 
 #stopButton {
-    background-color: #dc3545;
-    color: white;
+  background-color: #f44336;
+  color: white;
 }
 
 #emergencyButton {
-    background-color: #ff3b3b;
-    color: white;
+  background-color: #f44336;
+  color: white;
 }
 
-/* ======== INDICATOR (Lampu) ======== */
-.indicator {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: gray;
-    margin-bottom: 8px;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+/* Hover efek */
+button:hover {
+  opacity: 0.8;
 }
 
-/* ======== LOADING SCREEN ======== */
+/* Animasi Loading */
 #loadingScreen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ff416c, #ff4b2b);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    animation: fadeOut 3s ease forwards;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  color: #333;
 }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
+.loading-image {
+  width: 120px;
+  height: 120px;
+  animation: bounce 1.5s infinite;
 }
 
-/* Animasi Spinner */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-/* Loading fade-out */
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; display: none; }
+/* Emergency Flash */
+@keyframes emergencyBlink {
+  0% { background-color: red; }
+  50% { background-color: gray; }
+  100% { background-color: red; }
 }
