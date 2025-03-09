@@ -8,7 +8,7 @@ function hideLoading() {
   setTimeout(() => {
     document.getElementById("loadingScreen").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
-  }, 3000);
+  }, 3000); // Loading selama 3 detik
 }
 
 function toggleAuto() {
@@ -16,8 +16,9 @@ function toggleAuto() {
   if (!autoMode && !manualMode) {
     autoMode = true;
     updateStatus("Auto");
-    document.getElementById("autoIndicator").classList.add("glow");
-    document.getElementById("manualIndicator").classList.remove("glow");
+    document.getElementById("autoIndicator").style.backgroundColor = "green";
+    document.getElementById("manualIndicator").style.backgroundColor = "gray";
+    document.getElementById("stopIndicator").style.backgroundColor = "gray";
   }
 }
 
@@ -26,18 +27,22 @@ function toggleManual() {
   if (!manualMode && !autoMode) {
     manualMode = true;
     updateStatus("Manual");
-    document.getElementById("manualIndicator").classList.add("glow");
-    document.getElementById("autoIndicator").classList.remove("glow");
+    document.getElementById("manualIndicator").style.backgroundColor = "yellow";
+    document.getElementById("autoIndicator").style.backgroundColor = "gray";
+    document.getElementById("stopIndicator").style.backgroundColor = "gray";
   }
 }
 
 function stopMode() {
   if (emergencyMode) return;
-  autoMode = false;
-  manualMode = false;
-  updateStatus("Stopped");
-  document.getElementById("autoIndicator").classList.remove("glow");
-  document.getElementById("manualIndicator").classList.remove("glow");
+  if (autoMode || manualMode) {
+    autoMode = false;
+    manualMode = false;
+    updateStatus("Stopped");
+    document.getElementById("autoIndicator").style.backgroundColor = "gray";
+    document.getElementById("manualIndicator").style.backgroundColor = "gray";
+    document.getElementById("stopIndicator").style.backgroundColor = "red";
+  }
 }
 
 function toggleEmergency() {
@@ -60,18 +65,19 @@ function toggleEmergency() {
 function startEmergencyBlink() {
   let indicator = document.getElementById("emergencyIndicator");
   emergencyBlinking = setInterval(() => {
-    indicator.classList.toggle("glow");
+    indicator.style.backgroundColor = (indicator.style.backgroundColor === "red") ? "gray" : "red";
   }, 500);
 }
 
 function stopEmergencyBlink() {
   clearInterval(emergencyBlinking);
-  document.getElementById("emergencyIndicator").classList.remove("glow");
+  document.getElementById("emergencyIndicator").style.backgroundColor = "gray";
 }
 
 function stopAllIndicators() {
-  document.getElementById("autoIndicator").classList.remove("glow");
-  document.getElementById("manualIndicator").classList.remove("glow");
+  document.getElementById("autoIndicator").style.backgroundColor = "gray";
+  document.getElementById("manualIndicator").style.backgroundColor = "gray";
+  document.getElementById("stopIndicator").style.backgroundColor = "gray";
 }
 
 function updateStatus(status) {
@@ -79,9 +85,13 @@ function updateStatus(status) {
 }
 
 function disableButtons() {
-  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  document.getElementById("autoButton").disabled = true;
+  document.getElementById("manualButton").disabled = true;
+  document.getElementById("stopButton").disabled = true;
 }
 
 function enableButtons() {
-  document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  document.getElementById("autoButton").disabled = false;
+  document.getElementById("manualButton").disabled = false;
+  document.getElementById("stopButton").disabled = false;
 }
