@@ -8,9 +8,9 @@
 </head>
 <body onload="hideLoading()">
 
-  <!-- Animasi Loading dengan GIF Online -->
+  <!-- Animasi Loading (Kartun) -->
   <div id="loadingScreen">
-    <img src="https://i.gifer.com/7efs.gif" alt="Loading Animation" class="loading-image">
+    <img id="loadingImage" src="https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif" alt="Loading Animation">
     <p>Loading...</p>
   </div>
 
@@ -38,7 +38,7 @@
       </div>
 
       <div class="button-group">
-        <div class="indicator emergency" id="emergencyIndicator"></div>
+        <div class="indicator" id="emergencyIndicator"></div>
         <button id="emergencyButton" onclick="toggleEmergency()">Emergency</button>
       </div>
     </div>
