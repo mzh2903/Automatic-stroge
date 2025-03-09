@@ -3,80 +3,85 @@ let manualMode = false;
 let emergencyMode = false;
 let emergencyBlinking = null;
 
+// Fungsi Loading
 function hideLoading() {
-    setTimeout(() => {
-        document.getElementById("loadingScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-    }, 3000);
+  setTimeout(() => {
+    document.getElementById("loadingScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  }, 3000);
 }
 
 function toggleAuto() {
-    if (emergencyMode) return;
-    if (!autoMode && !manualMode) {
-        autoMode = true;
-        updateStatus("Auto Mode");
-        document.getElementById("autoIndicator").style.backgroundColor = "green";
-        document.getElementById("manualIndicator").style.backgroundColor = "gray";
-    }
+  if (emergencyMode) return;
+  if (!autoMode && !manualMode) {
+    autoMode = true;
+    updateStatus("Auto");
+    document.getElementById("autoIndicator").classList.add("glow");
+    document.getElementById("manualIndicator").classList.remove("glow");
+  }
 }
 
 function toggleManual() {
-    if (emergencyMode) return;
-    if (!manualMode && !autoMode) {
-        manualMode = true;
-        updateStatus("Manual Mode");
-        document.getElementById("manualIndicator").style.backgroundColor = "yellow";
-        document.getElementById("autoIndicator").style.backgroundColor = "gray";
-    }
+  if (emergencyMode) return;
+  if (!manualMode && !autoMode) {
+    manualMode = true;
+    updateStatus("Manual");
+    document.getElementById("manualIndicator").classList.add("glow");
+    document.getElementById("autoIndicator").classList.remove("glow");
+  }
 }
 
 function stopMode() {
-    if (emergencyMode) return;
-    autoMode = false;
-    manualMode = false;
-    updateStatus("Stopped");
-    resetIndicators();
+  if (emergencyMode) return;
+  autoMode = false;
+  manualMode = false;
+  updateStatus("Stopped");
+  document.getElementById("autoIndicator").classList.remove("glow");
+  document.getElementById("manualIndicator").classList.remove("glow");
 }
 
 function toggleEmergency() {
-    if (!emergencyMode) {
-        emergencyMode = true;
-        stopMode();
-        disableButtons();
-        startEmergencyBlink();
-    } else {
-        emergencyMode = false;
-        enableButtons();
-        stopEmergencyBlink();
-        stopMode();
-    }
+  if (!emergencyMode) {
+    emergencyMode = true;
+    autoMode = false;
+    manualMode = false;
+    updateStatus("Emergency");
+    disableButtons();
+    stopAllIndicators();
+    startEmergencyBlink();
+  } else {
+    emergencyMode = false;
+    enableButtons();
+    stopEmergencyBlink();
+    stopMode();
+  }
 }
 
 function startEmergencyBlink() {
-    let indicator = document.getElementById("emergencyIndicator");
-    emergencyBlinking = setInterval(() => {
-        indicator.style.backgroundColor = (indicator.style.backgroundColor === "red") ? "gray" : "red";
-    }, 500);
+  let indicator = document.getElementById("emergencyIndicator");
+  emergencyBlinking = setInterval(() => {
+    indicator.classList.toggle("glow");
+  }, 500);
 }
 
 function stopEmergencyBlink() {
-    clearInterval(emergencyBlinking);
-    document.getElementById("emergencyIndicator").style.backgroundColor = "gray";
+  clearInterval(emergencyBlinking);
+  document.getElementById("emergencyIndicator").classList.remove("glow");
 }
 
-function resetIndicators() {
-    document.getElementById("autoIndicator").style.backgroundColor = "gray";
-    document.getElementById("manualIndicator").style.backgroundColor = "gray";
+function stopAllIndicators() {
+  document.getElementById("autoIndicator").classList.remove("glow");
+  document.getElementById("manualIndicator").classList.remove("glow");
 }
 
 function updateStatus(status) {
-    document.getElementById("statusText").textContent = status;
+  document.getElementById("statusText").textContent = status;
 }
 
 function disableButtons() {
-    document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
 }
 
 function enableButtons() {
-    document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  document.querySelectorAll("button").forEach(btn => btn.disabled = false);
 }
